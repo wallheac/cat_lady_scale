@@ -1,1 +1,127 @@
 /* CSS FILE FOR CAT LADY SCALE */
+
+/*
+grey: 454851;
+black: 1E252B;
+blue: 6AD0E5;
+yellow: F2C548;
+red: F26360;
+*/
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: 'Roboto';
+    font-size: 1.6rem;
+    font-wieght: 400;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Dosis', sans-serif;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid #ffffff;
+    background-color: #1E252B;
+}
+
+.header .logo {
+    width: 10rem;
+}
+
+.header h1 {
+    color: #FFFFFF;
+    font-size: 2.8rem;
+    line-height: 7.684rem;
+    font-weight: 700;
+    font-family: 'Indie Flower', sans-serif;
+    margin: 0;
+    text-align: center;
+}
+
+.content {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+
+.behavior-section {
+    width: 40%;
+    margin: 0 2.5% 0 5%;
+    padding: 1rem;
+    background-color: #ffffff;
+}
+
+.status-section {
+    width: 100%;
+    margin: 0 5% 0 2.5%;
+}
+
+#new-behavior-form > * {
+    display: block;
+}
+
+.behaviors {
+    width: 100%;
+    height: 4rem;
+}
+
+.form-footer {
+    margin: 1rem 0;
+    text-align: right;
+}
+
+#add-behavior {
+    font-size: 1.4rem;
+    padding: 0.5rem 1rem;
+    background-color: #6AD0E5;
+    border-color: #6AD0E5;
+    border-radius: 5px;
+}
+
+.behavior-item  {
+    color: #454851;
+    padding: 1rem 2rem;
+    border: 2px solid #454851;
+    border-radius: 5px;
+}
+
+.behavior-item {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.behavior-item .description {
+}
+
+.behavior-item .points {
+    font-weight: 700;
+}
+
+.status-display {
+    padding: 2rem 10%;
+    margin: 0 auto;
+    background-color: #F2C548;
+}
+
+.status-image {
+    width: 40rem;
+    margin: auto;
+    border: 4px solid #F2C548;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.status-name {
+    width: 40rem;
+    margin: auto;
+    text-align: center;
+    padding: 1rem;
+    background: #ffffff;
+}

@@ -3,20 +3,58 @@
 
 <head>
     <title>Cat Lady Scale</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <meta content="width=device-width,maximum-scale=1.0,initial-scale=1.0,minimum-scale=1.0,user-scalable=yes" name="viewport">
 </head>
 
 <body>
     <div class='header'>
-        <h1>Cat Lady Scale</h1>
+        <div class="logo">
+            <img width="100%" src="images/grumpy_cat.svg" />
+        </div>
+        <h1>The Cat Lady Scale</h1>
     </div>
 
     <div class='content'>
-
+        <div class="behavior-section">
+            <h2>Cat Lady Behaviors</h2>
+            <div class="new-behavior">
+                <form id="new-behavior-form">
+                    <label>Select a Behavior</label>
+                    <select class="behaviors" value="">
+                        <option value=""></option>
+                        <!-- filled with javascript -->
+                    </select>
+                    <div class="form-footer">
+                        <button id="add-behavior">Add</button>
+                    </div>
+                </form>
+            </div>
+            <hr />
+            <div class="behavior-list">
+                <div class="behavior-item">
+                    <div class="description">agrees that there's a cat gif for everything</div>
+                    <div class="points">+2</div>
+                </div>
+            </div>
+        </div>
+        <div class="status-section">
+            <h2>Your Current Cat Lady Status:</h2>
+            <div class="status-display">
+                <div class="status-image">
+                    <img width="100%" src="images/cat_lady.jpg" />
+                </div>
+                <div class="status-name">
+                    Indifferent
+                </div>
+            </div>
+        </div>
     </div>
 
-    <script src='assets/scripts/jquery-3.1.1.min.js'></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src='js/main.js'></script>
 </body>
 
