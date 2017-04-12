@@ -46,7 +46,10 @@ $(document).ready(function(){
         new Behavior("own more than one cat", 5),
         new Behavior("own more than one dog", -5),
         new Behavior("takes selfies with cats", 4),
-        // TODO: add some more behaviors cat lady behaviors here to customize your app!
+        // -----------------------------------------------------------------------------------------
+        // TODO: CHALLENGE 1
+        // add some more behaviors cat lady behaviors here to customize your app!
+        // -----------------------------------------------------------------------------------------
     ];
 
     /*
@@ -79,21 +82,30 @@ $(document).ready(function(){
         behaviors: [],
         addBehavior : function (newBehavior) {
             //--------------------------------------------------------------------------------------
-            // TODO: Implement the add behavior function. This function should:
+            // TODO: CHALLENGE 2
+            // Implement the add behavior function. This function should:
             // 1. add the behavior object to the behaviors list in *this* catLady object (<- that
             //    is a hint)...
-            // 2. now that a new behavior is added... re-calculate the cat lady status
+            // 2. now that a new behavior is added... update *this* cat lady's status (hint you
+            //    should just call a function in this object)
             //--------------------------------------------------------------------------------------
         },
         status: CAT_LADY_SCALE[5], // just the inital status... INDIFFERENT
         updateStatus: function () {
             //--------------------------------------------------------------------------------------
-            // TODO: Implement the evaluate function to calculate where on the scale this cat lady
+            // TODO: CHALLENGE 8
+            // Implement the evaluate function to calculate where on the scale this cat lady
             // is. This function should:
             // 1. Loop through this catLady's behaviors array, to calculate the sum of all behavior
             //    point values. ** when adding up the point values, start the sum at 5 (indifferent)
             //    on the scale.
-            // 2. Update this cat lady's status
+            //--------------------------------------------------------------------------------------
+
+            //--------------------------------------------------------------------------------------
+            // TODO: CHALLENGE 9
+            // Use the pointValue sum to determine where on the scale this cat lady is. Match the
+            // sum to a value in the CAT_LADY_SCALE object. Get the Status object, located at the
+            // corresponding scale position. And then update this catLady status property.
             //--------------------------------------------------------------------------------------
 
         },
@@ -103,33 +115,57 @@ $(document).ready(function(){
      * Add Behavior Click Event
      * handles when the user adds a behavior
      */
+     //---------------------------------------------------------------------------------------------
+     // TODO:
+     // Implement the add-behavior event listener. This event listener should use js AND
+     // jQuery to update the Cat Lady Scale page upon a user adding a behavior to their cat lady.
+     // (see individual challenges below)
+     //---------------------------------------------------------------------------------------------
     $('#add-behavior').click(function(e){
         //------------------------------------------------------------------------------------------
-        // TODO: Implement the add-behavior event listener. This event listener should use js AND
-        // jQuery to update the Cat Lady Scale page upon a user adding a behavior to their cat lady.
-        // This event handler should:
+        // TODO: CHALLENGE 4
         // 1. Prevent the default page reload using jquery.
+        //------------------------------------------------------------------------------------------
+
+        //------------------------------------------------------------------------------------------
+        // TODO: CHALLENGE 5
         // 2. Grab the catLadyBehavior index value from the behavior option in the behavior-select
         //    field located in the html. This will be tricky... before you start try selecting
         //    different options in dropdown and observe what happens to the html.
+        //------------------------------------------------------------------------------------------
+
+        //------------------------------------------------------------------------------------------
+        // TODO: CHALLENGE 6
         // 3. Use the index value from step 2, to get the correct cat lady behavior from the
         //    catLadyBehaviors array.
-        // 3. Now add the behavior to the catLady object.
-        // 4. Display the newly added behavior with the displayNewBehavior function.
-        // 4. Display the cat lady status, with the displayStatus function;
+        // 4. Now add the behavior to the catLady object.
+        //------------------------------------------------------------------------------------------
+
+        //------------------------------------------------------------------------------------------
+        // TODO: CHALLENGE 7
+        // 5. Display the newly added behavior with the displayNewBehavior function.
+        //------------------------------------------------------------------------------------------
+
+        //------------------------------------------------------------------------------------------
+        // TODO: CHALLENGE 10
+        // 1. Display the cat lady status, with the displayStatus function;
         //------------------------------------------------------------------------------------------
 
     });
 
     /*
      * Display New Behavior
-     * add the new behavior to the display behavior list in the html
+     * add the passed in behavior to the display in the behavior list in the html
      */
     function displayNewBehavior (behavior)
     {
-        // TODO: this should do:
-        // 1. get the list item from the behavior
-        // 2. append the list item to the behavior list in the html
+        //------------------------------------------------------------------------------------------
+        // TODO: CHALLENGE 3
+        // Here you should use jquery to to add the correct behavior item div to the behavior-list
+        // element (see html file). To do this:
+        // 1. get the list item from the behavior object (see the behavior prototype)
+        // 2. append the list item to the behavior list element in the html
+        //------------------------------------------------------------------------------------------
     }
 
     /*
@@ -138,9 +174,13 @@ $(document).ready(function(){
      */
     function displayStatus (catLadyStatus)
     {
-        // TODO:
+        //------------------------------------------------------------------------------------------
+        // TODO: CHALLENGE 11
+        // Here you should use jquery to to update the Cat Lady Status Display. To do this:
         // 1. update the status image src in the html
         // 2. update the status title in the html
+        // ** make sure to checkout the status object for help!
+        //------------------------------------------------------------------------------------------
     }
 
     /*
