@@ -84,6 +84,8 @@ $(document).ready(function(){
             //    is a hint)...
             // 2. now that a new behavior is added... re-calculate the cat lady status
             //--------------------------------------------------------------------------------------
+            this.behaviors.push(newBehavior);
+            this.updateStatus();
         },
         status: CAT_LADY_SCALE[5], // just the inital status... INDIFFERENT
         updateStatus: function () {
@@ -95,7 +97,21 @@ $(document).ready(function(){
             //    on the scale.
             // 2. Update this cat lady's status
             //--------------------------------------------------------------------------------------
+            var pointSum = 5;
+            for (var i = 0; i < this.behaviors.length; i++){
+                pointSum += this.behaviors[i].pointValue;
+            }
 
+            var catLadyLevel;
+            if (CAT_LADY_SCALE[pointSum] != undefined){
+                catLadyLevel = CAT_LADY_SCALE[pointSum];
+            } else if ( pointSum > 10 ) {
+                catLadyLevel = CAT_LADY_SCALE[10];
+            } else if ( pointSum < 0 ) {
+                catLadyLevel = CAT_LADY_SCALE[10];
+            }
+
+            this.status = catLadyLevel;
         },
     };
 
@@ -118,7 +134,17 @@ $(document).ready(function(){
         // 4. Display the newly added behavior with the displayNewBehavior function.
         // 4. Display the cat lady status, with the displayStatus function;
         //------------------------------------------------------------------------------------------
+        e.preventDefault();
 
+        // grab behavior from html
+        var option = $('#behavior-select option:selected');
+        var index = $(option).attr('value');
+        var newBehavior = catLadyBehaviors[index];
+
+        catLady.addBehavior(newBehavior); // adds to cat lady
+        displayNewBehavior(newBehavior); // show behavior on HTML
+
+        displayStatus(catLady.status); // update catLady status
     });
 
     /*
@@ -130,6 +156,8 @@ $(document).ready(function(){
         // TODO: this should do:
         // 1. get the list item from the behavior
         // 2. append the list item to the behavior list in the html
+        var behaviorItem = behavior.getListItem();
+        $('.behavior-list').append(behaviorItem);
     }
 
     /*
@@ -141,6 +169,10 @@ $(document).ready(function(){
         // TODO:
         // 1. update the status image src in the html
         // 2. update the status title in the html
+        var imagePath = catLadyStatus.imagePath();
+        $('.status-display .status-image img').attr('src', imagePath);
+        $('.status-display .status-title').text(catLadyStatus.title);
+
     }
 
     /*
