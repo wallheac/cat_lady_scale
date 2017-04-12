@@ -24,8 +24,8 @@
             <div class="new-behavior">
                 <form id="new-behavior-form">
                     <label>Select a Behavior</label>
-                    <select class="behaviors" value="">
-                        <option value=""></option>
+                    <select id="behavior-select" class="behaviors" value="">
+                        <option value="-1" selected></option>
                         <!-- filled with javascript -->
                     </select>
                     <div class="form-footer">
@@ -35,10 +35,12 @@
             </div>
             <hr />
             <div class="behavior-list">
+                <!-- note: This is what a behavior item should look like...
                 <div class="behavior-item">
                     <div class="description">agrees that there's a cat gif for everything</div>
                     <div class="points">+2</div>
                 </div>
+                -->
             </div>
         </div>
         <div class="status-section">
@@ -47,7 +49,7 @@
                 <div class="status-image">
                     <img width="100%" src="images/cat_lady.jpg" />
                 </div>
-                <div class="status-name">
+                <div class="status-title">
                     Indifferent
                 </div>
             </div>

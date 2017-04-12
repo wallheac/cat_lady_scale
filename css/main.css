@@ -89,12 +89,14 @@ h1, h2, h3, h4, h5 {
     padding: 1rem 2rem;
     border: 2px solid #454851;
     border-radius: 5px;
-}
 
-.behavior-item {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
+}
+
+.behavior-item + .behavior-item {
+    margin-top: 1rem;
 }
 
 .behavior-item .description {
@@ -118,7 +120,7 @@ h1, h2, h3, h4, h5 {
     overflow: hidden;
 }
 
-.status-name {
+.status-title {
     width: 40rem;
     margin: auto;
     text-align: center;
