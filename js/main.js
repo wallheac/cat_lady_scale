@@ -1,84 +1,172 @@
 // Main JS File for Cat Lady Scale
 
-// TODO:
-// add cat lady scale images
-// implement the add behavior function
-// brain storm other functionality you could add to this...
-// update the document with the order of challenges...
-// add a remove button to the behavior list
-// add a displayed cat lady scale... or have then do this...
-
 $(document).ready(function(){
 
-    // Cat Lady Behaviors
-    // description: list of all possible behaviors to fill the drop down form
-    var catLadyBehaviors = [
-        { behavior: "agrees that there's a cat gif for everything", pointValue: 3 },
-        { behavior: "own one dog", pointValue: -2 },
-        { behavior: "own one cat", pointValue: 2 },
-        { behavior: "own more than one cat", pointValue: 5 },
-        { behavior: "own more than one dog", pointValue: -5 },
-        { behavior: "takes selfies with cats", pointValue: 4 },
-        // TODO: add some more behaviors here with a description and a pointValue associated with it...
-    ];
-
-    // Cat Lady Scale
-    // description: the cat lady scale is indexed by the number on the scale. Each
-    // scale number has an object with a title and image name associated with it.
-    var catLadyScale = {
-        10: {title: "Cat-sylum", image: 'cat_lady.jpg' },
-        9: {title: "ALL OF THE CATS", image: 'all_kittens.jpg' },
-        8: {title: "Takin Selfies With Cats", image: 'cat_selfie.jpg' },
-        7: {title: "A One-Cat Kind of Human", image: 'one_cat.jpg' },
-        6: {title: "Cat Gifs Are...Alright", image: 'grumpy.jpg' },
-        5: {title: "Indifferent", image: 'cat_dog_friends.jpg' },
-        4: {title: "Ehh, Dogs Greater...", image: 'cat_backseat.jpg' },
-        3: {title: "Dogs are where it's at", image: 'dogs.jpg' },
-        2: {title: "I wish I were allergic", image: 'allergic.jpg' },
-        1: {title: "Cats...like, the musical?", image: 'cats.jpg' },
-        0: {title: "What's a cat? Never heard of 'em", image: 'dog_heaven.jpg' },
-    };
-
-    // Cat Lady Object
-    var catLady = {
-        behaviors: [],
-        addBehavior : function (behavior, pointValue) {
-            // TODO: implement the Add Behavior function
-            // description: this function should add the passed in behavior and pointValue to
-            // the behaviorList array and return the new behvior object
-        },
-        level: function () {
-            // TODO: implement this function to calculate where on the cat lady scale this cat lady is
-            // descrition: this function should loop through the behaviors associated with this cat lady
-            // and return the calculated cat lady level (the sum of all behavior point values)
-            // the pointValue should start at 5 (indifferent on the cat lady scale.. then add behaviors to that)
-            // hint: you will have to use this. to access the behaviors array
-            var pointSum = 5;
-            return pointSum; // TODO: do I want this to return the object or the number?
+    /*
+     * Behavior Class
+     * constructor - needs the description and pointValue to construct
+     * listItem function - returns the behavior as an html string
+     */
+    function Behavior (description, pointValue) {
+        this.description = description;
+        this.pointValue = pointValue;
+    }
+    Behavior.prototype = {
+        getListItem: function () {
+            return '<div class="behavior-item">' +
+                '<div class="description">' + this.description + '</div>' +
+                '<div class="points">' + this.pointValue + '</div>' +
+                '</div>';
         },
     }
 
-    // Add Behavior to Behavior History
-    $('#add-behavior').click(function(){
-        // TODO: implement this function
-        // description: this event handler should do:
-        //   1) get behavior information (behavior text and pointValue) from the form
-        //   2) add a behavior the behavior to the cat lady object
-        //   3) display the new behavior in the behavior-list (html)
-        //   4) update the displayed cat lady level image and title
-        //   5) clear the add behavior form
+    /*
+     * Status Class
+     * constructor - needs the title for the status and a corresponding image
+     * imagePath function - returns local path to the image (for using in the src attr)
+     */
+    function Status (title, image) {
+        this.title = title;
+        this.image = image;
+    }
+    Status.prototype = {
+        imagePath: function (){
+            return 'images/' + this.image;
+        }
+    }
+
+    /*
+     * Cat Lady Behaviors
+     * list of all possible behaviors to fill the drop down form
+     */
+    var catLadyBehaviors = [
+        new Behavior("agrees that there's a cat gif for everything", 3),
+        new Behavior("own one dog", -2),
+        new Behavior("own one cat", 2),
+        new Behavior("own more than one cat", 5),
+        new Behavior("own more than one dog", -5),
+        new Behavior("takes selfies with cats", 4),
+        // TODO: add some more behaviors cat lady behaviors here to customize your app!
+    ];
+
+    /*
+     * Cat Lady Scale
+     * description: the cat lady scale is indexed by the number on the scale. Each
+     * scale number has an object with a title and image name associated with it.
+     */
+    var CAT_LADY_SCALE = {
+        10: new Status("Cat-sylum", 'cat_lady.jpg' ),
+        9: new Status("ALL OF THE CATS", 'all_kittens.jpg' ),
+        8: new Status("Takin Selfies With Cats", 'cat_selfie.jpg' ),
+        7: new Status("A One-Cat Kind of Human", 'one_cat.jpg' ),
+        6: new Status("Cat Gifs Are...Alright", 'grumpy.jpg' ),
+        5: new Status("Indifferent", 'cat_dog_friends.jpg' ),
+        4: new Status("Ehh, Dogs Greater...", 'cat_backseat.jpg' ),
+        3: new Status("Dogs are where it's at", 'dogs.jpg' ),
+        2: new Status("I wish I were allergic", 'allergic.jpg' ),
+        1: new Status("Cats...like, the musical?", 'cats.jpg' ),
+        0: new Status("What's a cat? Never heard of 'em", 'dog_heaven.jpg' ),
+    };
+
+    /*
+     * Cat Lady Object
+     * behaviors - array of behavior objects
+     * addBehavior - function that adds behavior and updates cat lady object as necessary
+     * status - the current cat lady status object
+     * updateStatus - function that updates the cat lady objects status
+     */
+    var catLady = {
+        behaviors: [],
+        addBehavior : function (newBehavior) {
+            //--------------------------------------------------------------------------------------
+            // TODO: Implement the add behavior function. This function should:
+            // 1. add the behavior object to the behaviors list in *this* catLady object (<- that
+            //    is a hint)...
+            // 2. now that a new behavior is added... re-calculate the cat lady status
+            //--------------------------------------------------------------------------------------
+        },
+        status: CAT_LADY_SCALE[5], // just the inital status... INDIFFERENT
+        updateStatus: function () {
+            //--------------------------------------------------------------------------------------
+            // TODO: Implement the evaluate function to calculate where on the scale this cat lady
+            // is. This function should:
+            // 1. Loop through this catLady's behaviors array, to calculate the sum of all behavior
+            //    point values. ** when adding up the point values, start the sum at 5 (indifferent)
+            //    on the scale.
+            // 2. Update this cat lady's status
+            //--------------------------------------------------------------------------------------
+
+        },
+    };
+
+    /*
+     * Add Behavior Click Event
+     * handles when the user adds a behavior
+     */
+    $('#add-behavior').click(function(e){
+        //------------------------------------------------------------------------------------------
+        // TODO: Implement the add-behavior event listener. This event listener should use js AND
+        // jQuery to update the Cat Lady Scale page upon a user adding a behavior to their cat lady.
+        // This event handler should:
+        // 1. Prevent the default page reload using jquery.
+        // 2. Grab the catLadyBehavior index value from the behavior option in the behavior-select
+        //    field located in the html. This will be tricky... before you start try selecting
+        //    different options in dropdown and observe what happens to the html.
+        // 3. Use the index value from step 2, to get the correct cat lady behavior from the
+        //    catLadyBehaviors array.
+        // 3. Now add the behavior to the catLady object.
+        // 4. Display the newly added behavior with the displayNewBehavior function.
+        // 4. Display the cat lady status, with the displayStatus function;
+        //------------------------------------------------------------------------------------------
+
     });
 
+    /*
+     * Display New Behavior
+     * add the new behavior to the display behavior list in the html
+     */
+    function displayNewBehavior (behavior)
+    {
+        // TODO: this should do:
+        // 1. get the list item from the behavior
+        // 2. append the list item to the behavior list in the html
+    }
+
+    /*
+     * Update Status Display
+     * updates the cat lady status display in the html with the cat status object it was passed
+     */
+    function displayStatus (catLadyStatus)
+    {
+        // TODO:
+        // 1. update the status image src in the html
+        // 2. update the status title in the html
+    }
+
+    /*
+     * Fill Behavior Drop Down
+     * adds all behaviors from the catLadyBehaviors array as options in the html dropdown
+     */
     function fillBehaviorDropDown ()
     {
         for (var i = 0; i < catLadyBehaviors.length; i++) {
-            var behavior = catLadyBehaviors[i].behavior;
+            var description = catLadyBehaviors[i].description;
             var points = catLadyBehaviors[i].pointValue;
-            var option = '<option value="">' + behavior + '</option>';
-            console.log(option);
+            var option = '<option value="' + i +'">' + description + '</option>';
             $('#new-behavior-form .behaviors').append(option);
         }
     }
 
-    fillBehaviorDropDown();
+    /*
+     * Updates the selected options in the add behavior drop down
+     * the current selected option, will have a select attribute associated with it.
+     */
+    $('body').on('change', 'select', function(){
+        $('option[selected]').removeAttr('selected');
+        $("option[value=" + this.value + "]").attr('selected', true);
+    });
+
+    // initial setup
+    fillBehaviorDropDown(); // fill drop down
+    displayStatus(catLady.status); // display initial cat lady status
 });
