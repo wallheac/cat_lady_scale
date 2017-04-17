@@ -107,16 +107,22 @@ $(document).ready(function(){
             //    point values. ** when adding up the point values, start the sum at 5 (indifferent)
             //    on the scale.
             //--------------------------------------------------------------------------------------
-            evaluate: function(){
-              
-            }
+            //do I need to make this a function? I don't think so
+              var length = this.behaviors.length;
+                  sum = 5;
+              for(var i = 0; i < length; i++){
+                sum += this.behaviors[i].pointValue;
+              }
+              if(sum > 10){
+                sum = 10;
+              }//account for too much catness
             //--------------------------------------------------------------------------------------
             // TODO: CHALLENGE 9
             // Use the pointValue sum to determine where on the scale this cat lady is. Match the
             // sum to a value in the CAT_LADY_SCALE object. Get the Status object, located at the
             // corresponding scale position. And then update this catLady status property.
             //--------------------------------------------------------------------------------------
-
+            this.status = CAT_LADY_SCALE[sum];
         },
     };
 //END OF catLady object
@@ -150,7 +156,7 @@ $(document).ready(function(){
         // 4. Now add the behavior to the catLady object.
         //------------------------------------------------------------------------------------------
         var behavior = catLadyBehaviors[index];
-        catLady.behaviors.push(behavior);
+        catLady.addBehavior(behavior);
         //------------------------------------------------------------------------------------------
         // TODO: CHALLENGE 7
         // 5. Display the newly added behavior with the displayNewBehavior function.
@@ -160,7 +166,7 @@ $(document).ready(function(){
         // TODO: CHALLENGE 10
         // 1. Display the cat lady status, with the displayStatus function;
         //------------------------------------------------------------------------------------------
-
+        displayStatus(catLady.status);
     });
 
     /*
@@ -177,7 +183,8 @@ $(document).ready(function(){
         // 2. append the list item to the behavior list element in the html
         //------------------------------------------------------------------------------------------
         var temp = $(behavior.getListItem());//this does return a node
-        $('#behavior-list').append(temp); //not sure this is working
+        //$('#behavior-list').append(temp); //not sure this is working
+        $(temp).appendTo('.behavior-list');
     }
 
     /*
@@ -193,6 +200,8 @@ $(document).ready(function(){
         // 2. update the status title in the html
         // ** make sure to checkout the status object for help!
         //------------------------------------------------------------------------------------------
+        $('.status-image img').attr('src', catLadyStatus.imagePath());
+        $('.status-title').html(catLadyStatus.title);
     }
 
     /*
