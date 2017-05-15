@@ -1,6 +1,13 @@
 // Main JS File for Cat Lady Scale
 
 $(document).ready(function(){
+  //draw Scale
+  var scale = $('<div class="scale-display"></div>');
+  for(var i = 0; i < 10; i ++){
+    $(scale).append('<div class="scale-item"><div class="circle"id=circle-'+
+     (i + 1) +'></div><p>'+(i+1)+'</p></div>');
+  }
+  $('.status-scale').append(scale);
 
     /*
      * Behavior Class
