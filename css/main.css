@@ -65,10 +65,20 @@ h1, h2, h3, h4, h5 {
 #new-behavior-form > * {
     display: block;
 }
-
+/*
 .behaviors {
     width: 100%;
     height: 4rem;
+}*/
+.checkbox{
+display: flex;
+padding: .5rem;
+margin: .5rem 0;
+border: 2px solid gray;
+border-radius: 5px;
+}
+.checkbox input{
+  align-self: flex-end;
 }
 
 .form-footer {
@@ -136,11 +146,27 @@ h1, h2, h3, h4, h5 {
   width: 25px;
 	height: 25px;
   margin: 1rem;
+  background: white;
 	border: 2px solid black;
 	-moz-border-radius: 15px;
 	-webkit-border-radius: 15px;
 	border-radius: 15px;
 }
+.hover-title{
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  width: 150px;
+  padding: 0 10px;
+  top: -80px;
+  right: -150px;
+  /*height: 30px;*/
+  background-color: #d7dee8;
+  opacity: 0.7;
+  border-radius: 10px;
+
+}
+
 .scale-item p{
   text-align: center;
 }

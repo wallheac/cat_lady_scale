@@ -1,13 +1,7 @@
 // Main JS File for Cat Lady Scale
 
 $(document).ready(function(){
-  //draw Scale
-  var scale = $('<div class="scale-display"></div>');
-  for(var i = 0; i < 10; i ++){
-    $(scale).append('<div class="scale-item"><div class="circle"id=circle-'+
-     (i + 1) +'></div><p>'+(i+1)+'</p></div>');
-  }
-  $('.status-scale').append(scale);
+
 
     /*
      * Behavior Class
@@ -90,6 +84,8 @@ $(document).ready(function(){
      * status - the current cat lady status object
      * updateStatus - function that updates the cat lady objects status
      */
+     var currSum = 5,
+          prevSum = 5; // for use in displaying the cat lady scale
     var catLady = {
         behaviors: [],
         addBehavior : function (newBehavior) {
@@ -116,12 +112,12 @@ $(document).ready(function(){
             //--------------------------------------------------------------------------------------
             //do I need to make this a function? I don't think so
               var length = this.behaviors.length;
-                  sum = 5;
+              prevSum = currSum;
               for(var i = 0; i < length; i++){
-                sum += this.behaviors[i].pointValue;
+                currSum += this.behaviors[i].pointValue;
               }
-              if(sum > 10){
-                sum = 10;
+              if(currSum > 10){
+                currSum = 10;
               }//account for too much catness
             //--------------------------------------------------------------------------------------
             // TODO: CHALLENGE 9
@@ -129,10 +125,18 @@ $(document).ready(function(){
             // sum to a value in the CAT_LADY_SCALE object. Get the Status object, located at the
             // corresponding scale position. And then update this catLady status property.
             //--------------------------------------------------------------------------------------
-            this.status = CAT_LADY_SCALE[sum];
+            this.status = CAT_LADY_SCALE[currSum];
         },
     };
 //END OF catLady object
+//draw Scale
+var scale = $('<div class="scale-display"></div>');
+for(var i = 0; i <= 10; i ++){
+  $(scale).append('<div class="scale-item"><div class="circle"id=circle-'+
+   i +' data-status="'+ CAT_LADY_SCALE[i].title +'"></div><p id=p-'+i+'>'+i+'</p></div>');
+}
+$('.status-scale').append(scale);
+
     /*
      * Add Behavior Click Event
      * handles when the user adds a behavior
@@ -190,7 +194,6 @@ $(document).ready(function(){
         // 2. append the list item to the behavior list element in the html
         //------------------------------------------------------------------------------------------
         var temp = $(behavior.getListItem());//this does return a node
-        //$('#behavior-list').append(temp); //not sure this is working
         $(temp).appendTo('.behavior-list');
     }
 
@@ -209,6 +212,22 @@ $(document).ready(function(){
         //------------------------------------------------------------------------------------------
         $('.status-image img').attr('src', catLadyStatus.imagePath());
         $('.status-title').html(catLadyStatus.title);
+        //var key = findKey(catLadyStatus);
+        //move the indicator button
+        $('#circle-'+ prevSum).css('background', 'white');
+        $('.circle p-' + prevSum).css('font-weight', 'normal');
+        $('#circle-'+ currSum).css('background', 'red');
+        $('.circle p-'+currSum).css('font-weight', 'bold');
+
+        $('#circle-'+currSum).hover(
+          function(){
+            $(this).css('position', 'relative');
+            $(this).append('<div class="hover-title"><p>'+CAT_LADY_SCALE[currSum].title+'</p></div>')
+          },
+          function(){
+            $('.hover-title').remove();
+          }
+        );
     }
 
     /*
@@ -218,12 +237,30 @@ $(document).ready(function(){
     function fillBehaviorDropDown ()
     {
         for (var i = 0; i < catLadyBehaviors.length; i++) {
-            var description = catLadyBehaviors[i].description;
-            var points = catLadyBehaviors[i].pointValue;
-            var option = '<option value="' + i +'">' + description + '</option>';
-            $('#new-behavior-form .behaviors').append(option);
+          let newInput = $('<div class="checkbox"></div>');
+          $(newInput).append('<p>'+catLadyBehaviors[i].description+'</p>');
+          $(newInput).append('<input type="checkbox" id="checkbox-'+
+          i+'">');
+
+          $('#new-behavior-form').append(newInput);
+
+
+
+            //var description = catLadyBehaviors[i].description;
+            //var points = catLadyBehaviors[i].pointValue; //why is this here?
+            //var option = '<option value="' + i +'">' + description + '</option>';
+            //$('#new-behavior-form .behaviors').append(option);
         }
     }
+/*ask why this DID NOT WORK
+    function findKey(catLadyStatus){
+      $.each(CAT_LADY_SCALE, function(index, value){
+        console.log(index +': ' + value.title);
+        //if(value.title == catLadyStatus.title){
+          //return index;
+        //}
+      });
+    }*/
 
     /*
      * Updates the selected options in the add behavior drop down
