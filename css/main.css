@@ -71,15 +71,21 @@ h1, h2, h3, h4, h5 {
     height: 4rem;
 }*/
 .checkbox{
-display: flex;
-padding: .5rem;
-margin: .5rem 0;
-justify-content: space-between;
-border: 2px solid gray;
-border-radius: 5px;
+  position: relative;
+  padding: .5rem;
+  margin: .5rem 0;
+  border: 2px solid gray;
+  border-radius: 5px;
+}
+.checkbox input{
+  position: absolute;
+  bottom: 38%;
+  left: 80%;
+  vertical-align: middle;
+  display: block;
 }
 .checkbox p{
-  display: inline-block;
+  width: 80%;
 }
 
 .form-footer {
