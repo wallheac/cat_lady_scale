@@ -74,11 +74,12 @@ h1, h2, h3, h4, h5 {
 display: flex;
 padding: .5rem;
 margin: .5rem 0;
+justify-content: space-between;
 border: 2px solid gray;
 border-radius: 5px;
 }
-.checkbox input{
-  align-self: flex-end;
+.checkbox p{
+  display: inline-block;
 }
 
 .form-footer {

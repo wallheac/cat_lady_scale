@@ -88,7 +88,7 @@ $(document).ready(function(){
           prevSum = 5; // for use in displaying the cat lady scale
     var catLady = {
         behaviors: [],
-        addBehavior : function (newBehavior) {
+        addBehavior : function (newBehavior, direction) {
             //--------------------------------------------------------------------------------------
             // TODO: CHALLENGE 2
             // Implement the add behavior function. This function should:
@@ -98,10 +98,10 @@ $(document).ready(function(){
             //    should just call a function in this object)
             //--------------------------------------------------------------------------------------
             this.behaviors.push(newBehavior);
-            this.updateStatus();
+            this.updateStatus(newBehavior, direction);
         },
         status: CAT_LADY_SCALE[5], // just the inital status... INDIFFERENT
-        updateStatus: function () {
+        updateStatus: function (newBehavior, direction) {
             //--------------------------------------------------------------------------------------
             // TODO: CHALLENGE 8
             // Implement the evaluate function to calculate where on the scale this cat lady
@@ -111,14 +111,21 @@ $(document).ready(function(){
             //    on the scale.
             //--------------------------------------------------------------------------------------
             //do I need to make this a function? I don't think so
-              var length = this.behaviors.length;
+              //var length = this.behaviors.length;
               prevSum = currSum;
-              for(var i = 0; i < length; i++){
-                currSum += this.behaviors[i].pointValue;
+              //for(var i = 0; i < length; i++){
+              if(direction == 'add'){
+                currSum += newBehavior.pointValue;
+              }
+              if(direction == 'subtract'){
+                currSum -= newBehavior.pointValue;
               }
               if(currSum > 10){
                 currSum = 10;
               }//account for too much catness
+              if(currSum < 0){
+                currSum=0;
+              }//account for too little catness
             //--------------------------------------------------------------------------------------
             // TODO: CHALLENGE 9
             // Use the pointValue sum to determine where on the scale this cat lady is. Match the
@@ -147,19 +154,33 @@ $('.status-scale').append(scale);
      // jQuery to update the Cat Lady Scale page upon a user adding a behavior to their cat lady.
      // (see individual challenges below)
      //---------------------------------------------------------------------------------------------
-    $('#add-behavior').click(function(e){
+    //$('#add-behavior').click(function(e){
         //------------------------------------------------------------------------------------------
         // TODO: CHALLENGE 4
         // 1. Prevent the default page reload using jquery.
         //------------------------------------------------------------------------------------------
-        event.preventDefault();
+        //event.preventDefault();
         //------------------------------------------------------------------------------------------
         // TODO: CHALLENGE 5
         // 2. Grab the catLadyBehavior index value from the behavior option in the behavior-select
         //    field located in the html. This will be tricky... before you start try selecting
         //    different options in dropdown and observe what happens to the html.
         //------------------------------------------------------------------------------------------
-        var index = $('#behavior-select').find(":selected").val();
+        //var index = $('#behavior-select').find(":selected").val();
+
+        //listen for change on behaviors checkboxes
+        $('.new-behavior').on('change', 'input:checkbox', function(){
+          event.preventDefault();
+          var index = $(this).val();
+              direction = 'add';
+          if($(this).is(':checked')){
+            direction = 'add';
+          }
+          else{
+            direction = 'subtract';
+          }
+
+
         //------------------------------------------------------------------------------------------
         // TODO: CHALLENGE 6
         // 3. Use the index value from step 2, to get the correct cat lady behavior from the
@@ -167,7 +188,7 @@ $('.status-scale').append(scale);
         // 4. Now add the behavior to the catLady object.
         //------------------------------------------------------------------------------------------
         var behavior = catLadyBehaviors[index];
-        catLady.addBehavior(behavior);
+        catLady.addBehavior(behavior, direction);
         //------------------------------------------------------------------------------------------
         // TODO: CHALLENGE 7
         // 5. Display the newly added behavior with the displayNewBehavior function.
@@ -239,8 +260,8 @@ $('.status-scale').append(scale);
         for (var i = 0; i < catLadyBehaviors.length; i++) {
           let newInput = $('<div class="checkbox"></div>');
           $(newInput).append('<p>'+catLadyBehaviors[i].description+'</p>');
-          $(newInput).append('<input type="checkbox" id="checkbox-'+
-          i+'">');
+          $(newInput).append('<input type="checkbox" name="checkbox" id="checkbox-'+
+          i+'" value='+i+'>');
 
           $('#new-behavior-form').append(newInput);
 
@@ -266,10 +287,10 @@ $('.status-scale').append(scale);
      * Updates the selected options in the add behavior drop down
      * the current selected option, will have a select attribute associated with it.
      */
-    $('body').on('change', 'select', function(){
+  /*  $('body').on('change', 'select', function(){
         $('option[selected]').removeAttr('selected');
         $("option[value=" + this.value + "]").attr('selected', true);
-    });
+    });*/
 
     // initial setup
     fillBehaviorDropDown(); // fill drop down
